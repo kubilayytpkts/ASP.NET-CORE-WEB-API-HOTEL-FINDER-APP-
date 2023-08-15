@@ -39,6 +39,11 @@ namespace HotelFinder.Business.Concrete
             return hotelrepository.GetHotelById(id);
         }
 
+        public Hotel GetHotelsByName(string name)
+        {
+           return hotelrepository.GetHotelsByName(name);
+        }
+
         public Hotel UpdateHotel(Hotel hotel)
         {
             return hotelrepository.UpdateHotel(hotel);

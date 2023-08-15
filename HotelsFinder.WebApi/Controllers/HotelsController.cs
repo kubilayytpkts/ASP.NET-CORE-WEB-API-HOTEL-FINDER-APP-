@@ -22,6 +22,7 @@ namespace HotelsFinder.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Route("[action]")]
         public IActionResult GetAllHotels()
         {
             var getAllHotels = hotelManeger.GetAllHotels();
@@ -36,7 +37,8 @@ namespace HotelsFinder.WebApi.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("[action]/{id}")]
         public IActionResult GetHotelsById(int id)
         {
             var getHotelByIde = hotelManeger.GetHotelsById(id);
@@ -53,6 +55,7 @@ namespace HotelsFinder.WebApi.Controllers
         /// <param name="hotel"></param>
         /// <returns></returns>
         [HttpPost]
+        [Route("[action]")]
         public IActionResult CreateHotel([FromBody]Hotel hotel)
         {
             var createdHotel = hotelManeger.CreateHotel(hotel);
@@ -68,6 +71,7 @@ namespace HotelsFinder.WebApi.Controllers
         /// <param name="hotel"></param>
         /// <returns></returns>
         [HttpPut]
+        [Route("[action]")]
         public  IActionResult UpdateHotel([FromBody]Hotel hotel) 
         {
             var updateHotel= hotelManeger.UpdateHotel(hotel);
@@ -77,11 +81,13 @@ namespace HotelsFinder.WebApi.Controllers
             }
             return BadRequest();
         }
+
         /// <summary>
         /// DELETE 
         /// </summary>
         /// <param name="id"></param>
-        [HttpDelete("{id}")]
+        [HttpDelete]
+        [Route("[action]/{id}")]
         public IActionResult DeleteHotel(int id) 
         {
             hotelManeger.DeleteHotel(id);
@@ -90,6 +96,17 @@ namespace HotelsFinder.WebApi.Controllers
                 return Ok("deletion successful");
             }
             return NotFound();
+        }
+        [HttpGet]
+        [Route("[action]/{name}")]
+        public IActionResult GetHotelsByName(string name)
+        {
+            var arrivingHotel = hotelManeger.GetHotelsByName(name);
+            if(arrivingHotel!=null)
+            {
+                return Ok(arrivingHotel);
+            }
+            return NotFound("the searched hotel was not found");
         }
     }
 

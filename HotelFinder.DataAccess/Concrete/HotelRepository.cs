@@ -47,6 +47,15 @@ namespace HotelFinder.DataAccess.Concrete
             }
         }
 
+        public Hotel GetHotelsByName(string name)
+        {
+            using(var hoteldbcontext=new HotelDbContext())
+            {
+                var hotelLocated = hoteldbcontext.Hotels.FirstOrDefault(m => m.Name.ToLower() == name.ToLower());
+                return hotelLocated;
+            }
+        }
+
         public Hotel UpdateHotel(Hotel hotel)
         {
             using(var hoteldbcontext=new HotelDbContext())
